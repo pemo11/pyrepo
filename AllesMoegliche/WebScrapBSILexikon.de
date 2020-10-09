@@ -1,0 +1,17 @@
+# Das BSI-Glossar scrappen
+# Problem: Die Seiten für die Buchstaben A bis Z müssen über eine URL nacheinander erst einmal abgerufen werden
+# Wäre ein gutes Beispiel für eine parallele Ausführtechnik
+# Beispiel für eine Adresse
+# A - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658204
+# B - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658206
+# C - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658208
+# D - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658210
+# E - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658212
+# F - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658214
+# G - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658216
+# usw.
+# Z - https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Glossar/Functions/glossar.html?nn=6597936&cms_lv2=6658254
+
+
+for nr in range(4,54,2):
+    pass
