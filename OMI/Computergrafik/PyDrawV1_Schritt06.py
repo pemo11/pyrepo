@@ -1,7 +1,12 @@
 # Ein einfaches Zeichenprogramm für 2D-Figuren mit tkinter
 # Erstellt: 09/10/20
 # Schritt 6: Zeichnen von Kurven und kontinuierliches Zeichnen
-# Noch nicht umgesetzt
+# Geht noch nicht - Problem mit der Zustandsverwaltung
+# Das Verhalten soll so sein:
+# Wenn connectMode = True ist, soll die nächste Linie automatisch am Endpunkt der letzten Linie beginnen
+# Außerdem soll in diesem Fall die letzte Linie nicht gelöscht werden, dh. das Löschen der Linie muss 1x aussetzen
+# Oder vielleicht einfacher umsetzbar: Wenn connectMode = True, wird der Anfangs nur dann auf den Endpunkt gesetzt,
+# wenn er sich in der Nähe befindet,also z.B. im Radius von 10 Pixeln
 
 from tkinter import *
 from tkinter.colorchooser import *
@@ -13,6 +18,9 @@ currentX = 0
 currentY = 0
 drawMode = False
 drawColor = "#0000ff"
+connectMode = False
+curveMode = False
+lineMode = False
 
 currentYOld = 0
 currentXOld = 0
@@ -47,7 +55,7 @@ class Window(Frame):
         drawColor = askcolor()[1]
 
     def startDraw(self, event):
-        global currentX, currentY,drawMode
+        global currentX, currentY, drawMode
         currentX = event.x
         currentY = event.y
         drawMode = True
@@ -58,8 +66,23 @@ class Window(Frame):
         currentYOld, currentXOld, currentX1Old, currentY1Old = (0,0,0,0)
         drawMode = False
 
-    def drawLine(self, event):
+    def changeDrawMode(self):
+        global connectMode
+        connectMode = not connectMode
+
+    def drawSomething(self, event):
         global currentYOld, currentXOld, currentX1Old, currentY1Old
+        # Soll ein Rechteck gezeichnet werden?
+        if LineMode == 1:
+            drawLine(event)
+        if rectMode == 1:
+            drawRect(event)
+        elif circleMode == 1:
+            drawCircle(event)
+        else:
+            drawCurve(event)
+
+    def drawLine(self, event):
         # Linienbreite holen
         lineWidth = int(self.entLineWidth.get())
         # Die alte Linie löschen
@@ -73,6 +96,17 @@ class Window(Frame):
         currentX1Old = currentX1
         currentY1Old = currentY1
 
+    def drawRect(self, event):
+        # Das alte Rechteck löschen
+        pass
+
+    def drawCircle(self, event):
+        # Den alten Kreis löschen
+        pass
+
+    def drawCurve(self, event):
+        pass
+
     def __init__(self, master):
         Frame.__init__(self, master)
         self.master = master
@@ -83,7 +117,7 @@ class Window(Frame):
         # Wichtig: Button-1-Event binden
         self.cavDraw.bind("<Button-1>", self.startDraw) 
         self.cavDraw.bind("<ButtonRelease-1>", self.stopDraw) 
-        self.cavDraw.bind("<B1-Motion>", self.drawLine)
+        self.cavDraw.bind("<B1-Motion>", self.drawSomething)
         self.fraControl = Frame(master,width=200,height=600)
         self.fraControl.grid(row=0,column=1,sticky="N")
         self.fraControl["bg"] = "lightyellow"
@@ -119,7 +153,15 @@ class Window(Frame):
         Label(self.fraControl,background="lightyellow").grid(row=12,column=0,columnspan=4)
         self.btnZeichnen = Button(self.fraControl,width=12,text="Farbwahl",command=self.chooseColor)
         self.btnZeichnen.grid(row=13,column=1,columnspan=2)
-
+        Label(self.fraControl,background="lightyellow").grid(row=14,column=0,columnspan=4)
+        self.chkConti = Checkbutton(self.fraControl, width=12, text="Freihand", onvalue=1, offvalue=0, anchor="w", command=self.changeDrawMode)
+        self.chkConti.grid(row=15,column=1,columnspan=2)
+        # variable= setzt die angegebene Variable auf den Wert 0/1 bzw. den durch onvalue/offvalue festgelegten Wert
+        self.chkLinie = Checkbutton(self.fraControl, width=12, text="Linie", onvalue=1, offvalue=0,  anchor="w", variable=lineMode)
+        self.chkLinie.grid(row=16,column=1,columnspan=2)
+        self.chkLinie = Checkbutton(self.fraControl, width=12, text="Kreis", onvalue=1, offvalue=0,  anchor="w", variable=circleMode)
+        self.chkLinie.grid(row=17,column=1,columnspan=2)
+        
         # Sorgt dafür, dass fraControl die volle Fläche einnimmt und nicht nur die, die es benötigt
         self.fraControl.grid_propagate(False) 
         # self.fraControl.grid_rowconfigure(1, weight=1)

@@ -21,7 +21,7 @@ error = 0
 sign = lambda x: x and (1, -1)[x<0]
 
 while x < x2:
-    print(f"x:{x} y:{y} e:{error}")
+    print(f"x:{x} y:{y} e:{round(error,1)}")
     x += 1
     error += steigung
     if error > 0.5:

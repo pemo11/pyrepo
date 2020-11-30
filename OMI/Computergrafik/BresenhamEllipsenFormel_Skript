@@ -1,0 +1,39 @@
+# Ellipsenberechnung nach Bresenham - Formel aus dem Skript
+# Erstellt: 17/10/20
+
+# x-Werte stimmen, y-Werte müssten negativ sein,e-Werte stimmen irgendwie, aber nicht genau?
+
+xMitte = 100
+yMitte = 1003
+ax = 10
+ay = 20
+
+anzahl = 5
+n = 0
+
+if ax > ay:
+    x = 0
+    y = ay
+    e = 4 * (ay*ay) + (1 - 4 * ay) * (ax*ax)
+    while (x * (ay*ay) < y * (ax*ax)) or (y == 0 and x < ax) and n < anzahl:
+        n += 1
+        x += 1
+        if e > 0 and y > 0:
+            y -= 1
+            e += (8 * 12) * (ay*ay) + (8*x + 12) * (ay*ay) + (8-8*y) * (ax*ax)
+        else:
+            e += (8 * x + 12) * (ay*ay)
+        print(x,y,e)
+elif ay > ax:
+    x = ax
+    y = 0
+    e = 4 * (ax*ax) + (1-4*ax) * (ay*ay)
+    while x * (ay*ay) > y * (ax*ax) and n < anzahl:
+        n += 1
+        y += 1
+        if e > 0:
+            x -= 1
+            e += (8 * y + 12)  * (ax*ax) + (8 - 8 * x) * (ay*ay)
+        else:
+            e += (8 * y + 12) * (ax*ax)
+        print(x,y,e)

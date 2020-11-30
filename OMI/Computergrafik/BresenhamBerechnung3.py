@@ -19,11 +19,13 @@ yOld = 0
 
 # int(True) = 1!
 sign = lambda x: x and (1, -1)[x<0]
-
+anzahl = 5
+n = 0
 abbruch = False
 if dx >= dy:
     en = abs(dx) - 2 * abs(dy)
     while not abbruch:
+        n += 1
         x += sign(dx)
         if en > 0:
             y = yOld
@@ -33,11 +35,12 @@ if dx >= dy:
             en += 2 * (abs(dx) - abs(dy))
         print(f"x={x}/y={y} mit e={en}")
         yOld = y
-        if x >= x2:
+        if x >= x2 or n == anzahl:
             abbruch = True
 else:
     en = abs(dy) - 2 * abs(dx)
     while not abbruch:
+        n += 1
         y += sign(dy)
         if en > 0:
             x = xOld
@@ -47,5 +50,5 @@ else:
             en += 2 * (abs(dy) - abs(dx))
         print(f"x={x}/y={y} mit e={en}")
         xOld = x
-        if y >= y2:
+        if y >= y2 or n == anzahl:
             abbruch = True
