@@ -142,7 +142,6 @@ class Window(Frame):
         self.entFactor.grid(row=5,column=1)
         Label(self.fraControl,background="lightyellow").grid(row=6,column=0,columnspan=4)
         Label(self.fraControl, width=5, borderwidth=1, text="Stärke:").grid(row=7,column=0,padx=4)
-        self.entLineWidth = Entry(self.fraControl, width=5)
         self.entLineWidth.grid(row=7,column=1)
         Label(self.fraControl,background="lightyellow").grid(row=8,column=0,columnspan=4)
         self.btnZeichnen = Button(self.fraControl,width=12,text="Zeichnen",command=self.Zeichnen1)

@@ -1,20 +1,20 @@
 # Übung 5 - Bezier-Kurve mit Casteljau-Algorithmus
-# Erstellt: 24/11/20
+# Erstellt: 24/11/20, Umgesetzt am 1/12/20
 
-import numpy as np
+from GCHelper import *
 
-P0 = np.array([0,0])
-P1 = np.array([1,1])
-P2 = np.array([3,1])
-P3 = np.array([4,0])
+p = {}
+p[(0,0)] = (0,0)
+p[(1,0)] = (1,1)
+p[(2,0)] = (3,1)
+p[(3,0)] = (4,0)
 
 # Skizzieren Sie die Kurve
 # Konstruieren Sie den Kurvenpunkt an der Stelle u = 1/3
-pListe = [P0,P1,P2,P3]
 
-u = 1/3
-pAlt = P0
-for P in pListe[1:]:
-    pNeu = (1-u) * pAlt + u * P
-    print(pNeu)
-    pAlt = P
+# Dieser Aufruf stimmt
+# casteljau(p)
+
+# Dieser Aufruf stimmt inzwischen auch
+p = [(0,0),(1,1),(3,1),(4,0)]
+casteljau2(p)
